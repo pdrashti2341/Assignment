@@ -1,0 +1,218 @@
+Create Database
+
+use drashti
+
+################################################################################################################################################
+
+
+Insert 
+
+ db.student.insertOne({name:"tirth",gender:"male",age:12})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("61e6811d716e11aece8f1baa")
+}
+
+#################################################################################################################################################
+
+
+select 
+
+
+ db.student.find()
+
+
+{ "_id" : ObjectId("61e6811d716e11aece8f1baa"), "name" : "tirth", "gender" : "male", "age" : 12 }
+
+
+db.student.find().pretty()
+
+
+{
+        "_id" : ObjectId("61e6811d716e11aece8f1baa"),
+        "name" : "tirth",
+        "gender" : "male",
+        "age" : 12
+}
+
+########################################################################################################################################################
+
+
+insert more than one 
+
+
+db.student.insertMany([{ name:"krupal", gender:"male",age:24},{name:"jay",gender:"male",age:23},{name:"nand",gender:"male",age:21}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("61e684a3716e11aece8f1bac"),
+                ObjectId("61e684a3716e11aece8f1bad"),
+                ObjectId("61e684a3716e11aece8f1bae")
+        ]
+}
+
+
+
+db.student.find().pretty()
+
+
+{
+        "_id" : ObjectId("61e6811d716e11aece8f1baa"),
+        "name" : "tirth",
+        "gender" : "male",
+        "age" : 12
+}
+{
+        "_id" : ObjectId("61e68387716e11aece8f1bab"),
+        "name" : "yash",
+        "gender" : "male",
+        "age" : 21
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bac"),
+        "name" : "krupal",
+        "gender" : "male",
+        "age" : 24
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bad"),
+        "name" : "jay",
+        "gender" : "male",
+        "age" : 23
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bae"),
+        "name" : "nand",
+        "gender" : "male",
+        "age" : 21
+}
+
+########################################################################################################################################################
+
+Update
+
+db.student.updateOne({name:"nand"}, {$set: {name:"manav"}})
+
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+
+> db.student.find({name:"manav"}).pretty()
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bae"),
+        "name" : "manav",
+        "gender" : "male",
+        "age" : 21
+}
+> db.student.find().pretty()
+{
+        "_id" : ObjectId("61e6811d716e11aece8f1baa"),
+        "name" : "tirth",
+        "gender" : "male",
+        "age" : 12
+}
+{
+        "_id" : ObjectId("61e68387716e11aece8f1bab"),
+        "name" : "yash",
+        "gender" : "male",
+        "age" : 21
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bac"),
+        "name" : "krupal",
+        "gender" : "male",
+        "age" : 24
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bad"),
+        "name" : "jay",
+        "gender" : "male",
+        "age" : 23
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bae"),
+        "name" : "manav",
+        "gender" : "male",
+        "age" : 21
+}
+
+> db.student.updateMany({age:21}, {$set: {age:22}})
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 2 }
+> db.student.find().pretty()
+{
+        "_id" : ObjectId("61e6811d716e11aece8f1baa"),
+        "name" : "tirth",
+        "gender" : "male",
+        "age" : 12
+}
+{
+        "_id" : ObjectId("61e68387716e11aece8f1bab"),
+        "name" : "yash",
+        "gender" : "male",
+        "age" : 22
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bac"),
+        "name" : "krupal",
+        "gender" : "male",
+        "age" : 24
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bad"),
+        "name" : "jay",
+        "gender" : "male",
+        "age" : 23
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bae"),
+        "name" : "manav",
+        "gender" : "male",
+        "age" : 22
+}
+
+########################################################################################################################################################
+
+
+Delete 
+
+
+db.student.deleteMany({name:"tirth"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.student.find().pretty()
+{
+        "_id" : ObjectId("61e68387716e11aece8f1bab"),
+        "name" : "yash",
+        "gender" : "male",
+        "age" : 22
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bac"),
+        "name" : "krupal",
+        "gender" : "male",
+        "age" : 24
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bad"),
+        "name" : "jay",
+        "gender" : "male",
+        "age" : 23
+}
+{
+        "_id" : ObjectId("61e684a3716e11aece8f1bae"),
+        "name" : "manav",
+        "gender" : "male",
+        "age" : 22
+}
+
+#############################################################################################################################################################
+
+Create Index
+
+
+
+db.student.createIndex({KEY:1})
+{
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "createdCollectionAutomatically" : false,
+        "ok" : 1
+}
